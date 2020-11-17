@@ -59,7 +59,7 @@ public:
     {
         supportsExtension("obj","Alias Wavefront OBJ format");
         supportsOption("noRotation","Do not do the default rotate about X axis");
-        supportsOption("noTesselateLargePolygons","Do not do the default tesselation of large polygons");
+        supportsOption("noTesselateLargePolygons","Do not do the default tessellation of large polygons");
         supportsOption("noTriStripPolygons","Do not do the default tri stripping of polygons");
         supportsOption("generateFacetNormals","generate facet normals for vertices without normals");
         supportsOption("noReverseFaces","avoid to reverse faces when normals and triangles orientation are reversed");
@@ -948,11 +948,9 @@ osgDB::ReaderWriter::ReadResult ReaderWriterOBJ::readNode(const std::string& fil
     std::string fileName = osgDB::findDataFile( file, options );
     if (fileName.empty()) return ReadResult::FILE_NOT_FOUND;
 
-
     osgDB::ifstream fin(fileName.c_str());
     if (fin)
     {
-
         // code for setting up the database path so that internally referenced file are searched for on relative paths.
         osg::ref_ptr<Options> local_opt = options ? static_cast<Options*>(options->clone(osg::CopyOp::SHALLOW_COPY)) : new Options;
         local_opt->getDatabasePathList().push_front(osgDB::getFilePath(fileName));
@@ -974,8 +972,6 @@ osgDB::ReaderWriter::ReadResult ReaderWriterOBJ::readNode(std::istream& fin, con
 {
     if (fin)
     {
-        fin.imbue(std::locale::classic());
-
         obj::Model model;
         model.readOBJ(fin, options);
 

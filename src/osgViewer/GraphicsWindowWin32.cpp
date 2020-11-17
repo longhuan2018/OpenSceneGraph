@@ -28,8 +28,8 @@
 #include <vector>
 #include <map>
 
-#include "Win32GWUtils"
-#include "windowsx.h"
+#include <osgViewer/api/Win32/Win32GWUtils>
+#include <windowsx.h>
 
 #define MOUSEEVENTF_FROMTOUCH           0xFF515700
 
@@ -846,7 +846,7 @@ bool Win32WindowingSystem::changeScreenSettings( const osg::GraphicsContext::Scr
     // Start by testing if the change would be successful (without applying it)
     //
 
-    unsigned int result = ::ChangeDisplaySettingsEx(displayDevice.DeviceName, &deviceMode, NULL, CDS_TEST, NULL);
+    LONG result = ::ChangeDisplaySettingsEx(displayDevice.DeviceName, &deviceMode, NULL, CDS_TEST, NULL);
     if (result==DISP_CHANGE_SUCCESSFUL)
     {
         result = ::ChangeDisplaySettingsEx(displayDevice.DeviceName, &deviceMode, NULL, 0, NULL);

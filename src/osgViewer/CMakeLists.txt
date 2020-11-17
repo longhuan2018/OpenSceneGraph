@@ -79,20 +79,19 @@ IF(WIN32 AND NOT ANDROID)
         ${HEADER_PATH}/api/Win32/GraphicsHandleWin32
         ${HEADER_PATH}/api/Win32/GraphicsWindowWin32
         ${HEADER_PATH}/api/Win32/PixelBufferWin32
+        ${HEADER_PATH}/api/Win32/Win32GWUtils
     )
     IF(OSG_USE_EGL)
         SET(LIB_COMMON_FILES ${LIB_COMMON_FILES}
             GraphicsWindowWin32.cpp
             PixelBufferWin32EGL.cpp
 			Win32GWUtils.cpp
-			Win32GWUtils
         )
     ELSE()
         SET(LIB_COMMON_FILES ${LIB_COMMON_FILES}
             GraphicsWindowWin32.cpp
             PixelBufferWin32.cpp
 			Win32GWUtils.cpp
-			Win32GWUtils
         )
     ENDIF()
 ELSE()
@@ -186,7 +185,7 @@ ELSE()
 
     ELSEIF(${OSG_WINDOWING_SYSTEM} STREQUAL "X11")
         # X11 for everybody else
-        INCLUDE(FindPkgConfig OPTIONAL)
+        find_package(PkgConfig QUIET)
         IF(PKG_CONFIG_FOUND)
 
             PKG_CHECK_MODULES(XRANDR xrandr)
